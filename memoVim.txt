@@ -1,0 +1,146 @@
+Un truc interessant pour apprendre à utiliser vim :
+noter les commandes qu'on retient au fur et à mesure
+
+mouvement
+
+	Déplacement
+
+		Se déplacer
+		hjkl    -> gauche, bas, haut, droite *
+		k       -> de k lignes vers le haut *
+		j       -> de k lignes vers le bas*
+		w       -> d'un mot vers la droite *
+		b       -> d'un mot vers la gauche *
+		fh      -> au prochain h (marche avec toutes les lettres) *
+		Fh      -> au précédent h *
+		%       -> au prochain délimiteur de bloc
+		%       -> (sur un délimiteur de bloc) au signe de bloc correspondant
+		nG      -> à la ligne n
+		}       -> au prochain saut de ligne
+		{       -> au précédent saut de ligne
+		/string -> à string
+		n       -> à la prochaine occurence
+		N       -> à la précédente occurence
+		ctrl-i  -> au précédent point où l'on était
+		ctrl-o  -> au prochain point
+		*       -> à la prochaine occurence du mot actuel
+		#       -> à la précédente occurence du mot actuel
+
+		Faire défiler le texte
+ 		ctrl-e -> vers le haut
+		ctrl-y -> vers le bas
+
+		Déplace le curseur
+		H      -> dernière ligne de l'écran
+		M      -> ligne centrale de l'écran
+		L      -> dernière ligne de l'écran
+
+		Fait défiler l'écran pour que la ligne en cours soit
+		z<Enter> -> en haut de l'écran
+		zz       -> au centre de l'écran
+		
+	Paramètre de contexte
+
+		$        -> fin de ligne
+		^        -> début de ligne
+		_        -> idem
+		i        -> inuide (intérieur d'un bloc)
+		a        -> around (extérieur d'un bloc)
+		w        -> début du prochain mot
+		e        -> fin du prochain mot
+		s        -> phrase (sentence)
+		p        -> paragraphe
+		[](){}"" -> délimiteur de bloc
+
+	Remplacement
+
+		ce              -> change jusqu'à la fin du mot
+		c$              -> change jusqu'à la fin de la phrase
+		ci)             -> remplace le bloc (), marche avec ()[]{}""
+		R               -> remplacer plusieurs caractères
+		:s/mot1/mot2    -> remplace mot1 par mot2 une fois sur la ligne
+		:s/mot1/mot2/g  -> idem mais avec toutes les occurences
+		n,ms/mot1/mot2  -> entre la ligne n et m
+		%s/mot1/mot2/g  -> pour tout le fichier
+		%s/mot1/mot2/gc -> pareil mais avec une invite pour confirmer chaque substitution
+
+	Séléction
+
+		v      -> mode de sélection par caractère
+		V      -> mode de sélection par bloc
+		crtl-v -> mode de sélection par colonne
+		y      -> copie la séléction * (ny copie n lignes)
+		yi)    -> copie le bloc (), marche avec ()[]{}""
+	
+	Actions
+
+		<      -> indenter vers la droite *
+		>      -> indenter vers la gauche *
+		==     -> auto-indenter la ligne
+		=      -> (en mode séléction) auto-indenter
+		I      -> (en mode séléction par bloc) permet d'insérer des caractères dans toutes les colonnes séléctionnées
+		crtl-o -> (en mode insertion) passe en mode normal pour une seule commande et revient en édition
+		ctrl-p -> auto-completion
+
+	Onglets
+		:tabedit <file>                         -> ouvre un fichier dans un nouvel onglet
+		gt (ou CTRL-PGDOWN), gT (ou CTRL-PGUP) -> respectivement passer à l'onglet suivant/précédent
+                :tabmode <entier>                       -> déplace l'onglet courant à la position indiquée (0 signifie premier onglet)
+		ctrl-W T                               -> si la fenêtre est splitée, détache le buffer en cours dans un nouvel onglet
+
+	Autre
+
+		:r fichier      -> rajouter le contenu d'un fichier
+		:r!commande     -> lit la sortie de la commande
+		:w nomDufichier -> enregistrer dans un fichier (marche aussi avec une sélection)
+		:help!          -> easter eggs
+
+	vimrc
+
+		set rnu                                                      -> numérotation relative
+
+		autocmd BufWritePost .vimrc source~/.vimrc                   -> Recharge automatiquement le .vimrc
+
+		autocmd InsertEnter * set cul                                -> souligne la ligne en cours d'insertion
+		autocmd InsertLeave * set nocul                              -> enlève le souligné si on quitte la ligne
+
+		autocmd FileType gitcommit DiffGitCached | wincmd p          -> voir les mises à jour git lors d'un commit dans une fenetre séparée
+
+		map <C-a> ggVG                                               -> ctrl-a comme tout le monde
+
+		highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+		match OverLength /\%81v.*/                                   -> //met en rouge les caractères des lignes de plus de 80 caractères
+
+	pluginsautocmd BufWritePost .vimrc source~/.vimrc
+
+		nerdTree                          -> à chercher :)
+		tagbar                            -> à chercher
+		fuzzyfinder                       -> à chercher
+		snipmate                          -> à chercher (interface avec des linters, par défault : vérifie le code à l'enregistrement) ?!?
+		syntastic                         -> à chercher
+		tabularize                        -> :Tab/string aligne verticalement correctement par rapport à la string
+						     par exemple j'ai aligné tous les -> avec ce plugin				| Installé
+		matchit                           -> étend le principe du % aux délimiteurs d'autres langages (ex : xml)	| Installé
+		easyMotion                        -> à chercher
+			filetype plugin indent on -> pour que netrw fonctionne
+
+	Sites à voir
+		
+*		vimbits.com
+
+* on peut mettre un chiffre devant pour le faire plusieurs fois
+
+/usr/share/vim/vim73/doc  	->	 lieu de stockage des fichiers d'apprentissage
+
+usr_03.txt
+
+
+#################################
+lieu d'essai nucleaire
+
+lorem ipsum dolor sic amet
+( zerty
+( j'ouvre une parenthèse
+et je la referme) et je mets du texte après
+qsdfgh
+)
