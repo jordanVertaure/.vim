@@ -1,10 +1,5 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing debian.vim since it alters the value of the
-" 'compatible' option.
+" author : Jordan vertaure
+
 
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
@@ -39,16 +34,17 @@ endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-set showcmd		" Show (partial) command in status line.
-set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
+set showcmd             " Show (partial) command in status line.
+set showmatch           " Show matching brackets.
+"set ignorecase         " Do case insensitive matching
+"set smartcase          " Do smart case matching
+set incsearch           " Incremental search
+"set autowrite          " Automatically save before commands like :next and :make
 "set hidden             " Hide buffers when they are abandoned
-set mouse=a		" Enable mouse usage (all modes) n marche aussi
+set mouse=a             " Enable mouse usage (all modes) n marche aussi
 set ttymouse=xterm2
 set nu
+color desert
 
 " Souligne la ligne actuelle en cours d'insertion
 autocmd InsertLeave * set nocul
@@ -62,20 +58,17 @@ map <C-a> ggVG
 
 "undo après avoir redémarré vim
 if exists("+undofile")
-	if isdirectory($HOME . '/.vim/undo')==0
-		:silent!mkdir -p ~/.vim/undo > /dev/null 2>&1
-	endif
-	set undodir=./.vim-undo//
-	set undodir+=-/.vim/undo//
-	set undofile
+        if isdirectory($HOME . '/.vim/undo')==0
+                :silent!mkdir -p ~/.vim/undo > /dev/null 2>&1
+        endif
+        set undodir=./.vim-undo//
+        set undodir+=-/.vim/undo//
+        set undofile
 endif
 
 " switch entre numérotation relative et absolue
 "au InsertEnter * :set nu
 "au InsertLeave * :set rnu
-
-"lancer code python
-"map <f5> :w<CR>!clear <CR>!python % <CR>
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -87,6 +80,6 @@ endif
 " match OverLength /\%81v.*/
 
 " Met en surbrillance les caractères non imprimables non désirés
-highlight NoSpacesEOL ctermbg=red ctermfg=white guibg=#592929
-match NoSpacesEOL / \+$/
+"highlight NoSpacesEOL ctermbg=red ctermfg=white guibg=#592929
+"match NoSpacesEOL / \+$/
 
